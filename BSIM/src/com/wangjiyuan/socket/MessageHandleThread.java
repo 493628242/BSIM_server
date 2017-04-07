@@ -1,6 +1,5 @@
-package com.wangjiyuan.scoket;
+package com.wangjiyuan.socket;
 
-import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -10,7 +9,7 @@ public class MessageHandleThread extends Thread {
 	private LinkedList<Message> messagePool;
 	public boolean state = true;
 	private static MessageHandleThread handle;
-	private HashMap<String, Socket> clientPool;
+	private HashMap<String, ClientSocket> clientPool;
 
 	private MessageHandleThread() {
 		super();
@@ -27,10 +26,14 @@ public class MessageHandleThread extends Thread {
 				continue;
 			} else {
 				Message message = messagePool.getFirst();
-				ClientSocket socket = (ClientSocket) clientPool.get(message
+				ClientSocket client = (ClientSocket) clientPool.get(message
 						.getTo());
-				socket.sendMessage(message);
-				messagePool.removeFirst();
+				if (client == null) {
+					System.out.println("未登录");
+				} else {
+					client.sendMessage(message);
+					messagePool.removeFirst();
+				}
 			}
 		}
 	}

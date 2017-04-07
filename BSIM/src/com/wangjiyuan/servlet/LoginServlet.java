@@ -26,6 +26,7 @@ public class LoginServlet extends BaseServlet {
 
 	public void init() throws ServletException {
 		// Put your code here
+		System.out.println("Login");
 	}
 
 	public void destroy() {

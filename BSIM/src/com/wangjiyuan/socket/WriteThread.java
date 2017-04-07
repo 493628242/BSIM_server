@@ -1,4 +1,4 @@
-package com.wangjiyuan.scoket;
+package com.wangjiyuan.socket;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -23,6 +23,7 @@ public class WriteThread extends Thread {
 	@Override
 	public void run() {
 		super.run();
+		System.out.println("write执行");
 		try {
 			while (ClientSocket.STATE) {
 				if (messages.size() == 0) {

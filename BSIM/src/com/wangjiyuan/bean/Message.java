@@ -10,99 +10,94 @@ import com.google.gson.annotations.SerializedName;
 
 public class Message implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@SerializedName("content")
 	private String content;
 	@SerializedName("time")
-    private Long time;
+	private Long time;
 	@SerializedName("formnickname")
-    private String formnickname;
+	private String formnickname;
 	@SerializedName("tonickname")
-    private String tonickname;
+	private String tonickname;
 	@SerializedName("form")
-    private String form;
+	private String form;
 	@SerializedName("to")
-    private String to;
+	private String to;
 	@SerializedName("type")
-    private int type;//类型 1为文本，0为图片
-	
+	private int type;// 类型 1为文本，0为图片,2验证消息
 
-    public static final int TEXT = 1;
-    public static final int IMAGE = 0;
+	public static final int TEXT = 1;
+	public static final int IMAGE = 0;
+	public static final int CODE = 2;
 
-    public Message() {
+	public Message() {
 
-    }
+	}
 
+	public String getContent() {
+		return content;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getForm() {
+		return form;
+	}
 
+	public void setForm(String form) {
+		this.form = form;
+	}
 
-    public String getForm() {
-        return form;
-    }
+	public Long getTime() {
+		return time;
+	}
 
-    public void setForm(String form) {
-        this.form = form;
-    }
+	public void setTime(Long time) {
+		this.time = time;
+	}
 
-    public Long getTime() {
-        return time;
-    }
+	public String getTo() {
+		return to;
+	}
 
-    public void setTime(Long time) {
-        this.time = time;
-    }
+	public void setTo(String to) {
+		this.to = to;
+	}
 
-    public String getTo() {
-        return to;
-    }
+	public int getType() {
+		return type;
+	}
 
-    public void setTo(String to) {
-        this.to = to;
-    }
+	public void setType(int type) {
+		this.type = type;
+	}
 
-    public int getType() {
-        return type;
-    }
+	public String getFormnickname() {
+		return formnickname;
+	}
 
-    public void setType(int type) {
-        this.type = type;
-    }
-    public String getFormnickname() {
-        return formnickname;
-    }
+	public void setFormnickname(String formnickname) {
+		this.formnickname = formnickname;
+	}
 
-    public void setFormnickname(String formnickname) {
-        this.formnickname = formnickname;
-    }
+	public String getTonickname() {
+		return tonickname;
+	}
 
-    public String getTonickname() {
-        return tonickname;
-    }
+	public void setTonickname(String tonickname) {
+		this.tonickname = tonickname;
+	}
 
-    public void setTonickname(String tonickname) {
-        this.tonickname = tonickname;
-    }
-    @Override
-    public String toString() {
-    	return "Message{" +
-                "content='" + content + '\'' +
-                ", time=" + time +
-                ", form='" + form + '\'' +
-                ", to='" + to + '\'' +
-                ", tonickname='" + tonickname + '\'' +
-                ", formnickname='" + formnickname + '\'' +
-                ", type=" + type +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Message{" + "content='" + content + '\'' + ", time=" + time
+				+ ", form='" + form + '\'' + ", to='" + to + '\''
+				+ ", tonickname='" + tonickname + '\'' + ", formnickname='"
+				+ formnickname + '\'' + ", type=" + type + '}';
+	}
 }

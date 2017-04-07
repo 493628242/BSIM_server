@@ -1,10 +1,6 @@
-package com.wangjiyuan.scoket;
+package com.wangjiyuan.socket;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -18,7 +14,7 @@ public class ChatServerSocketThread extends Thread {
 
 	private ServerSocket chatServerSocket;
 	private ClientSocket clientSocket;
-	private HashMap<String, Socket> clientPool;
+	private HashMap<String, ClientSocket> clientPool;
 	private boolean state = true;
 
 	private static ChatServerSocketThread server;
@@ -26,14 +22,14 @@ public class ChatServerSocketThread extends Thread {
 	private ChatServerSocketThread() {
 		try {
 			chatServerSocket = new ServerSocket(PORT);
-			clientPool = new HashMap<String, Socket>();
+			clientPool = new HashMap<String, ClientSocket>();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	//单例
+	// 单例
 	public static ChatServerSocketThread singleChatServerSocketThread() {
 		if (server == null) {
 			synchronized (ChatServerSocketThread.class) {
@@ -51,10 +47,9 @@ public class ChatServerSocketThread extends Thread {
 		// 循环连接客户端
 		while (state) {
 			try {
-				clientSocket = (ClientSocket) chatServerSocket.accept();
-
-				clientPool.put(clientSocket.getInetAddress().getHostAddress(),
-						clientSocket);
+				Socket socket = chatServerSocket.accept();
+				clientSocket = new ClientSocket(socket);
+				// clientPool.put(host + ":" + port, clientSocket);
 				// 开启新线程处理客户端与服务器的事务
 				clientSocket.StartThread();
 			} catch (IOException e) {
@@ -64,7 +59,7 @@ public class ChatServerSocketThread extends Thread {
 		}
 	}
 
-	public HashMap<String, Socket> getClientPool() {
+	public HashMap<String, ClientSocket> getClientPool() {
 		return clientPool;
 	}
 
